@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login Success</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Manrope:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0f1a1c;
+        --mist: #f6f1eb;
+        --sun: #f6c35c;
+        --clay: #d96b55;
+        --pine: #1f6f61;
+        --sea: #9ad2c5;
+        --card: rgba(255, 255, 255, 0.78);
+        --shadow: 0 24px 60px rgba(31, 41, 55, 0.2);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Manrope", "Trebuchet MS", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(1200px 600px at 10% 10%, rgba(246, 195, 92, 0.35), transparent 60%),
+          radial-gradient(1000px 500px at 90% 0%, rgba(154, 210, 197, 0.45), transparent 60%),
+          linear-gradient(135deg, #f2e5d9 0%, #f5f9f6 55%, #f0efe8 100%);
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+
+      .card {
+        width: min(900px, 100%);
+        background: var(--card);
+        backdrop-filter: blur(8px);
+        border-radius: 28px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(255, 255, 255, 0.65);
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        animation: rise 700ms ease-out;
+      }
+
+      .content {
+        padding: 48px 56px 52px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .eyebrow {
+        font-size: 0.85rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--pine);
+        font-weight: 700;
+      }
+
+      h1 {
+        font-family: "Fraunces", "Georgia", serif;
+        font-size: clamp(2.2rem, 4vw, 3.5rem);
+        line-height: 1.05;
+        margin: 0;
+      }
+
+      p {
+        margin: 0;
+        font-size: 1.05rem;
+        line-height: 1.65;
+        color: rgba(15, 26, 28, 0.75);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 12px;
+      }
+
+      .btn {
+        padding: 12px 20px;
+        border-radius: 999px;
+        font-weight: 700;
+        text-decoration: none;
+        border: 2px solid transparent;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: transform 180ms ease, box-shadow 180ms ease;
+      }
+
+      .btn-primary {
+        background: var(--pine);
+        color: #fff;
+        box-shadow: 0 12px 24px rgba(31, 111, 97, 0.28);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.85);
+        color: var(--pine);
+        border-color: rgba(31, 111, 97, 0.2);
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .panel {
+        position: relative;
+        padding: 40px 36px;
+        background:
+          radial-gradient(220px 220px at 75% 25%, rgba(246, 195, 92, 0.85), transparent 70%),
+          radial-gradient(280px 280px at 30% 90%, rgba(217, 107, 85, 0.9), transparent 70%),
+          linear-gradient(160deg, #10343b 0%, #0f1a1c 100%);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .badge {
+        width: min(260px, 80%);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 2px dashed rgba(255, 255, 255, 0.4);
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 18px;
+        animation: float 4s ease-in-out infinite;
+      }
+
+      .badge span {
+        display: block;
+        font-family: "Fraunces", "Georgia", serif;
+        font-size: clamp(1.4rem, 2vw, 1.8rem);
+        margin-bottom: 6px;
+      }
+
+      .badge small {
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+
+      .confetti {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .confetti span {
+        position: absolute;
+        width: 10px;
+        height: 18px;
+        opacity: 0.8;
+        animation: fall 2.8s ease-in-out infinite;
+      }
+
+      .confetti span:nth-child(1) { left: 15%; background: var(--sun); animation-delay: 0s; }
+      .confetti span:nth-child(2) { left: 30%; background: var(--sea); animation-delay: 0.4s; }
+      .confetti span:nth-child(3) { left: 48%; background: #fff; animation-delay: 0.2s; }
+      .confetti span:nth-child(4) { left: 68%; background: var(--clay); animation-delay: 0.6s; }
+      .confetti span:nth-child(5) { left: 82%; background: var(--sun); animation-delay: 0.1s; }
+
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(-30%) rotate(0deg);
+          opacity: 0;
+        }
+        30% {
+          opacity: 0.9;
+        }
+        100% {
+          transform: translateY(140%) rotate(30deg);
+          opacity: 0;
+        }
+      }
+
+      @media (max-width: 820px) {
+        .card {
+          grid-template-columns: 1fr;
+        }
+
+        .panel {
+          order: -1;
+          min-height: 240px;
+        }
+
+        .content {
+          padding: 36px 28px 40px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <section class="content">
+        <div class="eyebrow">Login verified</div>
+        <h1>Congratulations, you are in.</h1>
+        <p>Your OAuth2 login completed successfully. You can head back to the app or explore your secured area.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="/">Go to homepage</a>
+          <a class="btn btn-secondary" href="/logout">Sign out</a>
+        </div>
+      </section>
+      <aside class="panel">
+        <div class="confetti">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="badge">
+          <span>Access Granted</span>
+          <small>Secure session active</small>
+        </div>
+      </aside>
+    </main>
+  </body>
+</html>

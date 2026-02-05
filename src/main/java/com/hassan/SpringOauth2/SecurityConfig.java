@@ -16,7 +16,7 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
-                .oauth2Login(Customizer.withDefaults());
+                .oauth2Login(oauth -> oauth.defaultSuccessUrl("/success.html", true));
 
 
         return http.build();

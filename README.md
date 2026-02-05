@@ -1,82 +1,74 @@
-# Spring OAuth2 Project
+# Spring OAuth2 Login Project
 
-This project demonstrates the implementation of OAuth2 authentication and authorization using Spring Framework. It provides a secure way to manage user authentication and access control for your application.
+This project demonstrates OAuth2 login with Google and GitHub using Spring Boot. After a successful login, users are redirected to a responsive congratulation page.
+
+![Success page preview](index_page.png)
 
 ## Features
 
-- OAuth2-based authentication and authorization.
-- Secure API endpoints.
-- Token-based access control.
-- Integration with a database for user management.
+- OAuth2 login with Google and GitHub
+- Spring Security protected routes
+- Responsive success page after login
 
 ## Prerequisites
 
-Before running the project, ensure you have the following installed:
+- Java 17 or higher (Spring Boot 3.x requires Java 17)
+- Maven (or use the included `mvnw` wrapper)
+- Google and GitHub OAuth2 credentials
 
-- Java 11 or higher
-- Maven or Gradle
-- A database (e.g., MySQL, PostgreSQL)
+## Required OAuth2 credentials
 
-## Setup Instructions
+In order to run the application, there are Google and GitHub client and secret it required.
 
-1. **Clone the Repository**  
-   Clone this repository to your local machine:
+You must create OAuth2 credentials for both providers and set:
 
-   ```bash
-   git clone <repository-url>
-   cd SpringOauth2
-   ```
+- Google: `client-id` and `client-secret`
+- GitHub: `client-id` and `client-secret`
 
-2. **Configure the Database**  
-   Update the `application.properties` or `application.yml` file with your database credentials:
+## Configure OAuth2
 
-   ```properties
-   spring.datasource.url=jdbc:<your-database-url>
-   spring.datasource.username=<your-username>
-   spring.datasource.password=<your-password>
-   ```
+Edit `src/main/resources/application.properties` and replace the placeholders:
 
-3. **Build the Project**  
-   Use Maven or Gradle to build the project:
+```properties
+spring.security.oauth2.client.registration.google.client-id=YOUR_GOOGLE_CLIENT_ID
+spring.security.oauth2.client.registration.google.client-secret=YOUR_GOOGLE_CLIENT_SECRET
 
-   ```bash
-   # For Maven
-   mvn clean install
+spring.security.oauth2.client.registration.github.client-id=YOUR_GITHUB_CLIENT_ID
+spring.security.oauth2.client.registration.github.client-secret=YOUR_GITHUB_CLIENT_SECRET
+```
 
-   # For Gradle
-   gradle build
-   ```
+## Run the application
 
-4. **Run the Application**  
-   Start the application using:
+From the project root:
 
-   ```bash
-   mvn spring-boot:run
-   ```
+```bash
+./mvnw spring-boot:run
+```
 
-5. **Access the Application**  
-   The application will be available at `http://localhost:8080`.
+The app will start at `http://localhost:8080`.
 
-## API Endpoints
+## Login URLs
 
-- **Authentication Endpoint**: `/oauth/token`  
-  Use this endpoint to obtain access tokens.
+- Default entry (redirects to log in): `http://localhost:8080/`
+- Google login: `http://localhost:8080/oauth2/authorization/google`
+- GitHub login: `http://localhost:8080/oauth2/authorization/github`
 
-- **Protected Resources**: `/api/**`  
-  Access these endpoints with a valid token.
+After a successful login, the app redirects to:
 
-## Technologies Used
+- Success page: `http://localhost:8080/success.html`
 
-- Spring Boot
-- Spring Security
-- Spring OAuth2
-- Hibernate
-- MySQL (or any other relational database)
+## Project structure
+
+- `src/main/java/com/hassan/SpringOauth2/SecurityConfig.java` - Security configuration and login success redirect
+- `src/main/java/com/hassan/SpringOauth2/HelloController.java` - Basic authenticated endpoint
+- `src/main/resources/static/success.html` - Responsive success page
+- `src/main/resources/application.properties` - OAuth2 client configuration
+
+## Troubleshooting
+
+- If the IDE asks for a JDK, set the Project SDK to Java 17.
+- If login fails, verify that redirect URIs are set in your OAuth2 provider console.
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-## Contributing
-
-Contributions are welcome! Feel free to open issues or submit pull requests.
+MIT License. See `LICENSE` for details.
